@@ -15,7 +15,7 @@ const ClientStackedNftsList = () => {
           </div>
           <div className="wrapper wrapper-content animated fadeInRight">
             {/* Page title start */}
-            <PageTitle page_headline="Clinet stcked nfts" />
+            <PageTitle page_headline="Client stacked nfts" />
             {/* Page title end */}
 
             <div className="row form_bg table_responsive white-bg">

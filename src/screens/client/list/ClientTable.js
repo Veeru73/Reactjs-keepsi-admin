@@ -49,7 +49,7 @@ const ClientTable = () => {
               <tr>
                 <th className="th-sm">SNO</th>
                 <th className="th-sm">Wallet Address</th>
-                <th className="th-sm">Stacke Nfts</th>
+                <th className="th-sm">Stacked Nfts</th>
                 <th className="th-sm">Action</th>
               </tr>
             </thead>
@@ -61,17 +61,16 @@ const ClientTable = () => {
                   <td>{client.nftsCount}</td>
                   <td>
                     <Link
-                      to={"/client-cdc-token-logic-screen/" + client.id}
-                      className="btn btn-info btn-sm mr-1"
-                    >
-                      Set CDC token logic
-                    </Link>
-
-                    <Link
                       to={"/client-stacked-nfts/" + client.id}
                       className="btn btn-info btn-sm mr-1"
                     >
                       Stacked Nfts
+                    </Link>
+                    <Link
+                      to={"/client-cdc-token-logic-screen/" + client.id}
+                      className="btn btn-info btn-sm mr-1"
+                    >
+                      Set CDC token logic
                     </Link>
                   </td>
                 </tr>
