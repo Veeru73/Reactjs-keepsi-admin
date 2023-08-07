@@ -39,7 +39,6 @@ const ClientCdcTokenLogicForm = () => {
 
     if (selectedType === "FIXED") {
       dataToSend["fixed_ktokens_required"] = +fixedKtokens;
-      dataToSend["per_nft_ktokens_required"] = {};
     } else {
       let per_nft_ktokens_required = {};
       cdcTokenLogicData.nfts.forEach((nft) => {
@@ -122,6 +121,7 @@ const ClientCdcTokenLogicForm = () => {
                                     name="title"
                                     placeholder="Enter fixed k tokens"
                                     value={fixedKtokens}
+                                    min="1"
                                     onChange={fixedKtokensHandler}
                                     required
                                   />
@@ -154,6 +154,7 @@ const ClientCdcTokenLogicForm = () => {
                                           )
                                         }
                                         placeholder="Enter k tokens"
+                                        min="1"
                                         required
                                       />
                                     </div>
