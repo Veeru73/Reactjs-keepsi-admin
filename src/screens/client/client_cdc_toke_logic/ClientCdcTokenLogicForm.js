@@ -88,96 +88,102 @@ const ClientCdcTokenLogicForm = () => {
         <Loader />
       ) : (
         <>
-          <div className="topic_form">
-            <form onSubmit={handleFormSubmit}>
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="row mt-4">
-                    <div className="col">
-                      <div className="form-group">
-                        <label htmlFor="type">Type</label>
-                        <select
-                          className="form-control"
-                          id="type"
-                          onChange={typeHandler}
-                          name="type"
-                          value={selectedType}
-                        >
-                          <option value="PERNFT">PERNFT</option>
-                          <option value="FIXED">FIXED</option>
-                        </select>
-                      </div>
+          {Object.keys(cdcTokenLogicData).length != 0 ? (
+            <>
+              <div className="topic_form">
+                <form onSubmit={handleFormSubmit}>
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="row mt-4">
+                        <div className="col">
+                          <div className="form-group">
+                            <label htmlFor="type">Type</label>
+                            <select
+                              className="form-control"
+                              id="type"
+                              onChange={typeHandler}
+                              name="type"
+                              value={selectedType}
+                            >
+                              <option value="PERNFT">PERNFT</option>
+                              <option value="FIXED">FIXED</option>
+                            </select>
+                          </div>
 
-                      <div className="col">
-                        {selectedType === "FIXED" ? (
-                          <>
-                            <div className="form-group">
-                              <label htmlFor="name">K-Token</label>
-                              <input
-                                type="number"
-                                className="form-control"
-                                id="k-token"
-                                name="title"
-                                placeholder="Enter fixed k tokens"
-                                value={fixedKtokens}
-                                onChange={fixedKtokensHandler}
-                                required
-                              />
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            {cdcTokenLogicData?.nfts?.map((nft, index) => (
-                              <div key={index} className="form-group">
-                                <label htmlFor={`k-token-${index}`}>
-                                  K-Token
-                                </label>
-                                <div className="input-group">
-                                  <div className="input-group-append">
-                                    <span className="input-group-text">
-                                      NFT token id :- {nft.token_id}
-                                    </span>
-                                  </div>
+                          <div className="col">
+                            {selectedType === "FIXED" ? (
+                              <>
+                                <div className="form-group">
+                                  <label htmlFor="name">K-Token</label>
                                   <input
                                     type="number"
                                     className="form-control"
-                                    id={`k-token-${index}`}
-                                    name={`title-${index}`}
-                                    //   value={nft?.ktokens}
-                                    value={nftKTokens[nft.token_id] || ""} // Pre-filled value for PERNFT type
-                                    onChange={(event) =>
-                                      handleNftKTokensChange(
-                                        event,
-                                        nft.token_id
-                                      )
-                                    }
-                                    placeholder="Enter k tokens"
+                                    id="k-token"
+                                    name="title"
+                                    placeholder="Enter fixed k tokens"
+                                    value={fixedKtokens}
+                                    onChange={fixedKtokensHandler}
                                     required
                                   />
                                 </div>
-                              </div>
-                            ))}
-                          </>
-                        )}
+                              </>
+                            ) : (
+                              <>
+                                {cdcTokenLogicData?.nfts?.map((nft, index) => (
+                                  <div key={index} className="form-group">
+                                    <label htmlFor={`k-token-${index}`}>
+                                      K-Token
+                                    </label>
+                                    <div className="input-group">
+                                      <div className="input-group-append">
+                                        <span className="input-group-text">
+                                          NFT token id :- {nft.token_id}
+                                        </span>
+                                      </div>
+                                      <input
+                                        type="number"
+                                        className="form-control"
+                                        id={`k-token-${index}`}
+                                        name={`title-${index}`}
+                                        //   value={nft?.ktokens}
+                                        value={nftKTokens[nft.token_id] || ""} // Pre-filled value for PERNFT type
+                                        onChange={(event) =>
+                                          handleNftKTokensChange(
+                                            event,
+                                            nft.token_id
+                                          )
+                                        }
+                                        placeholder="Enter k tokens"
+                                        required
+                                      />
+                                    </div>
+                                  </div>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                  {loading ? (
+                    <Loader />
+                  ) : (
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-block btn-sm w-25 my-4"
+                      size="sm"
+                    >
+                      <span className="spinner-border spinner-border-sm"></span>
+                      {isExistingRecordId ? "Update" : "ADD"}
+                    </button>
+                  )}
+                </form>
               </div>
-              {loading ? (
-                <Loader />
-              ) : (
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-block btn-sm w-25 my-4"
-                  size="sm"
-                >
-                  <span className="spinner-border spinner-border-sm"></span>
-                  {isExistingRecordId ? "Update" : "ADD"}
-                </button>
-              )}
-            </form>
-          </div>
+            </>
+          ) : (
+            <div>Client has no stacked nfts</div>
+          )}
         </>
       )}
     </>

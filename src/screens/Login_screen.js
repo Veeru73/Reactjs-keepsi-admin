@@ -1,20 +1,19 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import LogInBackground from "../images/logIn-background.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { login } from "../services/Api_calling";
-import { useRef, useState } from "react";
+import { useRef, useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { authActions } from "../states/reducers/auth";
 import Loader from "../components/Loader";
+import { AuthContext } from "../states/AuthContext";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const emailRef = useRef();
   const pwdRef = useRef();
+  const { setLoggedIn } = useContext(AuthContext);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -32,13 +31,13 @@ export default function Login() {
     };
     const res = await login(data);
     if (res.success) {
-      localStorage.setItem("login", "1");
+      setLoggedIn(true);
+      localStorage.setItem("loggedIn", "true");
       localStorage.setItem("authToken", `${res.data.token}`);
-      dispatch(authActions.setLoginState(true)); // set the value fo
       toast.success("Logged in successfully");
 
       setTimeout(() => {
-        navigate("/Dashboard", { replace: true });
+        navigate("/dashboard", { replace: true });
       }, 1000);
     } else {
       toast.error(res.msg);

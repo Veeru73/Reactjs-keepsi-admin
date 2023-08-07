@@ -10,7 +10,7 @@ export default function Sidebar() {
               <Link to="/home">
                 <img
                   className=""
-                  src="asset/logo/logo.jpeg"
+                  src="assets/logo/logo.jpeg"
                   alt="logo"
                   style={{ width: "139px", height: "80px", margin: "0px auto" }}
                 />

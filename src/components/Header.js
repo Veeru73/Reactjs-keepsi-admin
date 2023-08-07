@@ -1,15 +1,14 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { authActions } from "../../src/states/reducers/auth";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+import { AuthContext } from "../states/AuthContext";
+import { useContext } from "react";
 
 const Header = (props) => {
-  const dispatch = useDispatch();
+  const { setLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const onLogoutHandler = (e) => {
+    setLoggedIn(false);
     localStorage.clear();
-    dispatch(authActions.setLoginState(false));
-
     navigate("/", { replace: true });
   };
 
@@ -38,8 +37,7 @@ const Header = (props) => {
           <li>
             <a
               onClick={() => {
-                localStorage.clear();
-                this.props.history.push("/");
+                onLogoutHandler();
               }}
             >
               <i className="fa fa-sign-out"></i> Log out
